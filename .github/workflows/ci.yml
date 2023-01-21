@@ -23,4 +23,5 @@ jobs:
     - name: Code Coverage
       uses: actions-rs/tarpaulin@v0.1.0
       with:
+        version: 0.22.0
         args: '--ignore-tests'
