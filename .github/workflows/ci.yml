@@ -18,7 +18,7 @@ jobs:
       - name: Build
         run: cargo build --verbose
       - name: Test
-        run: cargo test --verborse
+        run: cargo test --verbose
         
   code-style:
     runs-on: ubuntu-20.04
