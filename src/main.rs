@@ -1,4 +1,3 @@
-use actix_web::web::get;
 use std::net::TcpListener;
 use zero2prod::configuration::get_configuration;
 use zero2prod::startup::run;
@@ -7,8 +6,9 @@ use zero2prod::startup::run;
 async fn main() -> std::io::Result<()> {
     let config = get_configuration().expect("Failed to read configuration.");
 
-    let listener = TcpListener::bind("127.0.0.1:0").expect("Failed to bind random port");
-    let port = listener.local_addr().unwrap().port();
-    println!("Server listening at http://127.0.0.1:{}", port);
+    let address = format!("127.0.0.1:{}", config.application_port);
+    //let port = listener.local_addr().unwrap().port();
+    let listener = TcpListener::bind(address)?;
+    println!("Server listening at http://{}", listener.local_addr()?);
     run(listener)?.await
 }
