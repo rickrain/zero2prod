@@ -18,7 +18,21 @@ To run the solution locally, your local machine must meet the following requirem
 
 The solution includes the script `./scripts/init_db.sh` that will run an instance using Docker and also perform some configuration. Execute this script first as it is required to even build the solution.
 
+> Note: If you already have PostgreSQL running on your machine, you may get an error when running `./scripts/init_db.sh` indicating that the port is already in use. If so, consider stopping your local instance using `systemctl stop postgresql`.
+
 To run the tests, run `cargo test`.
 
 To run the solution, run `cargo run` and then open a browser to the server address, which should be http://127.0.0.1:8000.
+
+With a running instance of the solution, test out some of the routes using `curl`.
+
+```bash
+# Call the health check endpoint (HTTP GET)
+curl -v http://127.0.0.1:8000/health_check
+
+# Add a subscriber to the subcriptions table (HTTP POST)
+curl -vd "name=john%20doe&email=john_doe%40gmail.com" -X POST http://127.0.0.1:8000/subscriptions
+```
+
+
 
